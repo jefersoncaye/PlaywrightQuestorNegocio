@@ -2,7 +2,6 @@ import time
 import pytest
 import Utilitarios.Login
 from PageObjects.Administracao.agrupador import Agrupador
-from playwright.sync_api import expect
 from Utilitarios.acoesPersonalizadas import AcoesPersonalizadas
 
 def cadastroAgrupador(page) -> None:
