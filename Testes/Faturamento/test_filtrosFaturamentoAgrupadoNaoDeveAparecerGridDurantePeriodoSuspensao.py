@@ -5,41 +5,41 @@ from Utilitarios.FaturamentoAgrupado import filtrosFaturamentoAgrupado
 from playwright.sync_api import expect
 from Utilitarios.acoesPersonalizadas import AcoesPersonalizadas
 
+
 def validacaoServicosContrato(page, casoTeste):
     ap = AcoesPersonalizadas(page)
     faturamentocontratoagrupado = FaturamentoContratoAgrupado(page)
-    page.on("Console", print("Valida o Grid Principal"))
-    expect(faturamentocontratoagrupado.gripPrincialContratos.last) \
-        .to_have_text('103 - AES TIETE ENERGIA SAcontrato seisNão Informado')
+    ap.expectHaveText(faturamentocontratoagrupado.gripPrincialContratos.last, '103 - AES TIETE ENERGIA SAcontrato seisNão Informado',
+                      'Grid Principal')
     ap.click(faturamentocontratoagrupado.btnAbrirPrimeiroDetalhamentoGridPrincipal.first, 'Primeiro Detalhamento do Grid Principal não Aberto')
     if casoTeste == 1:
-        page.on("Console", print("Valida o Detalhamento Grid Principal"))
-        expect(faturamentocontratoagrupado.detalhamentoGripPrincialContratos.last)\
-            .to_have_text('Recorrente24 - Serv. Recorrente01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente26 - Serv. Desconto01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente27 - Serv. Cancelado01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente28 - Serv. Suspensao01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Variável23 - Serv. Valor Zerado01/12/2021 1R$ 1.000,00R$ 1.000,00')
+        valorEsperado1 = 'Recorrente24 - Serv. Recorrente01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente26 - Serv. Desconto01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente27 - Serv. Cancelado01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente28 - Serv. Suspensao01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Variável23 - Serv. Valor Zerado01/12/2021 1R$ 1.000,00R$ 1.000,00'
+        ap.expectHaveText(faturamentocontratoagrupado.detalhamentoGripPrincialContratos.last, valorEsperado1,
+                          'Detalhamento Grid Principal Caso 1')
     if casoTeste == 2:
-        page.on("Console", print("Valida o Detalhamento Grid Principal"))
-        expect(faturamentocontratoagrupado.detalhamentoGripPrincialContratos.last)\
-            .to_have_text('Recorrente24 - Serv. Recorrente01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente26 - Serv. Desconto01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente27 - Serv. Cancelado01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00')
+        valorEsperado2 = 'Recorrente24 - Serv. Recorrente01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente26 - Serv. Desconto01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente27 - Serv. Cancelado01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
+        ap.expectHaveText(faturamentocontratoagrupado.detalhamentoGripPrincialContratos.last, valorEsperado2,
+                          'Detalhamento Grid Principal Caso 2')
     if casoTeste == 3:
-        page.on("Console", print("Valida o Detalhamento Grid Principal"))
-        expect(faturamentocontratoagrupado.detalhamentoGripPrincialContratos.last)\
-            .to_have_text('Recorrente24 - Serv. Recorrente01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente26 - Serv. Desconto01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente27 - Serv. Cancelado01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente28 - Serv. Suspensao01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00')
+        valorEsperado3 = 'Recorrente24 - Serv. Recorrente01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente26 - Serv. Desconto01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente27 - Serv. Cancelado01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente28 - Serv. Suspensao01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
+        ap.expectHaveText(faturamentocontratoagrupado.detalhamentoGripPrincialContratos.last, valorEsperado3,
+                          'Detalhamento Grid Principal Caso 3')
     if casoTeste == 4:
-        page.on("Console", print("Valida o Detalhamento Grid Principal"))
-        expect(faturamentocontratoagrupado.detalhamentoGripPrincialContratos.last)\
-            .to_have_text('Recorrente24 - Serv. Recorrente01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente26 - Serv. Desconto01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente27 - Serv. Cancelado01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
-                          'Recorrente28 - Serv. Suspensao01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00')
+        valorEsperado4 = 'Recorrente24 - Serv. Recorrente01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente26 - Serv. Desconto01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente27 - Serv. Cancelado01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00' \
+                         'Recorrente28 - Serv. Suspensao01/12/2021Indeterminado1R$ 1.000,00R$ 1.000,00'
+        ap.expectHaveText(faturamentocontratoagrupado.detalhamentoGripPrincialContratos.last, valorEsperado4,
+                          'Detalhamento Grid Principal Caso 4')
 
 @pytest.mark.Faturamento
 @pytest.mark.FaturamentoAgrupado

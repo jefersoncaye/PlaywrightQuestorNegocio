@@ -3,27 +3,31 @@ import pytest
 import Utilitarios.Login
 from PageObjects.Administracao.agrupador import Agrupador
 from playwright.sync_api import expect
+from Utilitarios.acoesPersonalizadas import AcoesPersonalizadas
 
 def cadastroAgrupador(page) -> None:
+    ap = AcoesPersonalizadas(page)
     agrupador = Agrupador(page)
-    page.goto("http://lyra:82/administracao/agrupador")
+    ap.navegar("http://lyra:82/administracao/agrupador")
     time.sleep(1)
-    agrupador.btnInserir.click()
-    agrupador.descricao.fill("teste de agrupador de condição de pagamento")
-    agrupador.tipoDeAgrupador.click()
-    agrupador.selecaoLista("Condição de Pagamento").click()
-    page.get_by_role("treeitem", name="Testes Automatizados").get_by_role("checkbox").click()
-    agrupador.btnSalvar.click()
+    ap.click(agrupador.btnGenerico("Inserir"), 'Botão Inserir')
+    ap.fill(agrupador.descricao, "teste de agrupador de condição de pagamento")
+    ap.click(agrupador.tipoDeAgrupador, 'Tipo de Agrupador')
+    ap.click(agrupador.selecaoLista("Condição de Pagamento"), 'Condição de Pagamento')
+    ap.click(page.get_by_role("treeitem", name="Testes Automatizados").get_by_role("checkbox"), 'CheckBox Testes Automatizados')
+    ap.click(agrupador.btnSalvar, 'Botão Salvar')
 
 def exclusaoAgrupador(page) -> None:
+    ap = AcoesPersonalizadas(page)
     agrupador = Agrupador(page)
-    page.goto("http://lyra:82/administracao/agrupador")
+    ap.navegar("http://lyra:82/administracao/agrupador")
     time.sleep(1)
-    agrupador.pesquisaDescricaoGrid.fill("teste de agrupador de condição de pagamento")
-    agrupador.pesquisaDescricaoGrid.press("Enter")
-    agrupador.btnApagarNoGrid.first.click()
-    page.get_by_role("button", name="Sim").click()
-    expect(page.get_by_text("O registro foi removido com sucesso.")).to_have_text("O registro foi removido com sucesso.")
+    ap.fill(agrupador.pesquisaDescricaoGrid, "teste de agrupador de condição de pagamento")
+    ap.press(agrupador.pesquisaDescricaoGrid, "Enter")
+    ap.click(agrupador.linkGenerico("Eliminar").first, 'Primeiro botão de Apagar no Grid')
+    ap.click(agrupador.btnGenerico("Sim"), "Sim")
+    ap.expectHaveText(page.get_by_text("O registro foi removido com sucesso."), "O registro foi removido com sucesso.",
+                      'Mensagem Registro Removido')
     time.sleep(2)
 
 

@@ -1,27 +1,25 @@
-import time
-
 import pytest
-
 import Utilitarios.Login
 from PageObjects.Faturamento.faturamentocontratoagrupado import FaturamentoContratoAgrupado
 from Utilitarios.FaturamentoAgrupado import validaFiltrosFaturamentoAgrupado, filtrosFaturamentoAgrupado
-from playwright.sync_api import expect
+from Utilitarios.acoesPersonalizadas import AcoesPersonalizadas
 
 
 
 def validacaoFiltroFaturamentoAgrupadoContratos01a136(page):
+    ap = AcoesPersonalizadas(page)
     faturamentocontratoagrupado = FaturamentoContratoAgrupado(page)
-    expect(faturamentocontratoagrupado.gripPrincialContratos).to_have_text(
-            '98 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010Contrato 1Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  '
-            '225 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010128Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  '
-            '226 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010129Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  '
-            '227 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010130Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  '
-            '228 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010131Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  '
-            '229 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010132Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento  '
-            '230 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010133Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento  '
-            '231 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010134Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento  '
-            '232 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010135Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento  '
-            '233 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010136Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento')
+    valorEsperado = '98 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010Contrato 1Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  ' \
+                    '225 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010128Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  ' \
+                    '226 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010129Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  ' \
+                    '227 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010130Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  ' \
+                    '228 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010131Não InformadoCond. Pgto 1 - Testes Katia Filtros Faturamento  ' \
+                    '229 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010132Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento  ' \
+                    '230 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010133Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento  ' \
+                    '231 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010134Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento  ' \
+                    '232 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010135Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento  ' \
+                    '233 - EMPRESA USADA EM TESTE AUTOMATIZADO DE CONTRATO TRF: #2051010136Não InformadoCond. Pgto 2 - Testes Katia Filtros Faturamento'
+    ap.expectHaveText(faturamentocontratoagrupado.gripPrincialContratos, valorEsperado, 'Grid Principal')
 
 @pytest.mark.Faturamento
 @pytest.mark.FaturamentoAgrupado
@@ -40,4 +38,5 @@ def test_filtrosFaturamentoAgrupadoCT01(set_up):
     validaFiltrosFaturamentoAgrupado.validacaoServicosFiltroFaturamentoAgrupado134(page)
     validaFiltrosFaturamentoAgrupado.validacaoServicosFiltroFaturamentoAgrupado135(page)
     validaFiltrosFaturamentoAgrupado.validacaoServicosFiltroFaturamentoAgrupado136(page)
+    page.on("Console", print("Fim do teste"))
     page.close()

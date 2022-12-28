@@ -11,10 +11,6 @@ class Agrupador:
         self.page = page
 
     @property
-    def btnInserir(self):
-        return self.page.get_by_role("button", name="Inserir")
-
-    @property
     def descricao(self):
         return self.page.locator("#Descricao")
 
@@ -33,6 +29,8 @@ class Agrupador:
     def pesquisaDescricaoGrid(self):
         return self.page.get_by_role("textbox")
 
-    @property
-    def btnApagarNoGrid(self):
-        return self.page.get_by_role("link", name="Eliminar")
+    def btnGenerico(self, valor):
+        return self.page.get_by_role("button", name=valor)
+
+    def linkGenerico(self, valor):
+        return self.page.get_by_role("link", name=valor)

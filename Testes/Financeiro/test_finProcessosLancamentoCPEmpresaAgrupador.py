@@ -20,6 +20,7 @@ def lancamentoContasPagar(page, fornecedor, documento, especie, condicaoPagement
     contapagar.selecaoLista("15 - 1.04.01 - Clientes").click()
     contapagar.btnSalvar.click()
     contapagar.abaPagamento.click()
+    time.sleep(1)
     contapagar.condicaoPagamento.type(condicaoPagemento)
     if valorTotal == '':
         page.wait_for_selector("[class='dx-empty-message']")

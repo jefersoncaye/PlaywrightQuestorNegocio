@@ -1,7 +1,7 @@
 import time
 
 def LoginQN(page, usuario, senha, empresa):
-    page.on("console", print(f'Fazendo Login com a empresa: {empresa}, usuario: {usuario}, senha: {senha}'))
+    page.on("console", print(f'\nFazendo Login com a empresa: {empresa}, usuario: {usuario}, senha: {senha}'))
     page.goto("http://lyra:82/acesso/entrar", timeout=90000)
     while page.is_visible('xpath=//*[@id="cookieConsent"]',timeout = 2000):
         page.get_by_role("button", name="Permitir").click()
